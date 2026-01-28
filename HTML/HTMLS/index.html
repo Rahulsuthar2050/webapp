@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="../css/index_font.css">
-<link rel="stylesheet" href="../css/index.css"> </link>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index_font.css')}}"></link>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css')}}"> </link>
 
 
 <div class="icon-bar">
     <a class="active" href="Home"><i class="fa fa-home"></i>Home</a>
-    <a href="../HTMLS/login.html"><i class="fa fa-search"></i>Login</a>
+    <a href="{{ url_for('login_page')}}"><i class="fa fa-search"></i>Login</a>
     <a href="#"><i class="fa fa-envelope">about</i></a>
     <a href="#"><i class="fa fa-globe">help</i></a>
     <a href="#"><i class="fa fa-trash">contact</i></a>
 </div>
-
+<h1> Devops Project by Rahul Suthar</h1>
 </body>
 
 </html>
