@@ -1,0 +1,18 @@
+All works so python runs on port 5000
+aand we exposed docker 5000 port on docker fine so request can come on container 5000
+
+and when we run docker so we map 9000 port to 5000 on my laptop 9000 port will foward request to docker containe rto port 5000
+
+docker run -p 9000:5000 mywebapp-2.0:latest
+
+if need to run in detached mode use -d option
+
+------------------------------------------------
+ docker build -t mywebapp-2.0 -f ./Docker/Dockerfile .
+
+ Build has be done like this as docker filr copy . . cmd will copy all files from current dir to container
+
+ my cli has to be in main structure of cli as so from there i run build cmd so its copy all files in current directory of cli
+
+-----------------------------------------------------------------------------------------------------------------------------
+
