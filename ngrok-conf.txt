@@ -1,0 +1,14 @@
+use ngrok app for GIT SCM polling .
+
+On git hub webhook it does not support localhost settings the jenkins which run on local host prt 8080
+
+so we get a url from ngrok which is forward to local host
+now update that link in github webhook
+<ngrok link>/github-webhook/
+
+
+
+run 
+ngrok https 8080
+
+a forwading url will be created.
