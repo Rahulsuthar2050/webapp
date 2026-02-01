@@ -9,10 +9,24 @@ if need to run in detached mode use -d option
 
 ------------------------------------------------
  docker build -t mywebapp-2.0 -f ./Docker/Dockerfile .
-
- Build has be done like this as docker filr copy . . cmd will copy all files from current dir to container
+  Build has be done like this as docker filr copy . . cmd will copy all files from current dir to container
 
  my cli has to be in main structure of cli as so from there i run build cmd so its copy all files in current directory of cli
+=========
+image build post grss sql
+ docker build -t mywebapp-postgress1.0:latest -f ./Docker-postgress-sql/Dockerfile .
+ docker run --name webapp-postgressdb -v "$(pwd)/sqldata:/var/lib/postgresql/data" -p 5432:5432 -d mywebapp-postgress1.0:latest
+pwd her is current working dir
+
+docker exec -it webapp-postgressdb psql -U rahul -d webapp
+==========
+sql quries
+==========
+  CREATE DATABASE webapp;
+  create table users ( id SERIAL PRIMARY KEY,name VARCHAR(100) NOT NULL, password VARCHAR(100),timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP);   
+  insert into users(name,password) VALUES ('admin','admin');
+===========
+
 
 -----------------------------------------------------------------------------------------------------------------------------
 
