@@ -37,18 +37,18 @@ jobs:
       name: Build and push python code
       with:
         image: rahulsuthar007/webapp
-        tags: webapp_python_{{ github.ref_name}}
+        tags: webapp_python_${{ github.ref_name}}
         registry: docker.io
         dockerfile: ./Docker/Dockerfile
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
     - uses: mr-smithers-excellent/docker-build-push@v6
       name: Build and push databse postgress code
       with:
         image: rahulsuthar007/webapp
-        tags: webapp_postgress_databse_{{ github.ref_name}}
+        tags: webapp_postgress_databse_${{ github.ref_name}}
         registry: docker.io
         dockerfile: ./Docker-postgress-sql/Dockerfile
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
