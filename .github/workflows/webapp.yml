@@ -5,9 +5,9 @@ name: Python application
 
 on:
   push:
-    branches: [ "database_addition-fix" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "database_addition-fix" ]
+    branches: [ "master" ]
   
 
 permissions:
