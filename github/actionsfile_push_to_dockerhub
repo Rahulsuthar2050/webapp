@@ -5,11 +5,9 @@ name: Python application
 
 on:
   push:
-    tags:
-      - '*'
-    branches: [ "master" ]
+    branches: [ "database_addition-fix" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "database_addition-fix" ]
   
 
 permissions:
@@ -39,7 +37,7 @@ jobs:
       name: Build and push python code
       with:
         image: rahulsuthar007/webapp
-        tags: {{ github.ref_name}}
+        tags: webapp_python_{{ github.ref_name}}
         registry: docker.io
         dockerfile: ./Docker/Dockerfile
         username: ${{ secrets.DOCKER_USERNAME }}
@@ -49,7 +47,7 @@ jobs:
       name: Build and push databse postgress code
       with:
         image: rahulsuthar007/webapp
-        tags: v1, latest
+        tags: webapp_postgress_databse_{{ github.ref_name}}
         registry: docker.io
         dockerfile: ./Docker-postgress-sql/Dockerfile
         username: ${{ secrets.DOCKER_USERNAME }}
