@@ -39,5 +39,6 @@ jobs:
         tags: v1, latest
         registry: docker.io
         dockerfile: ./Docker/Dockerfile
-        username: rahulsuthar007
-        password: R@hul9731162684
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
