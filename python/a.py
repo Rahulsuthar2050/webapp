@@ -1,3 +1,5 @@
 import os
-HTML_dir = os.path.abspath('./HTML')
-print(HTML_dir)
+from dotenv import load_dotenv
+load_dotenv()
+
+print(os.getenv('DB_user'))

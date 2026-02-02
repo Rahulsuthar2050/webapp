@@ -8,6 +8,7 @@ docker run -p 9000:5000 mywebapp-2.0:latest
 if need to run in detached mode use -d option
 
 ------------------------------------------------
+Below cmd is is to run the files
  docker build -t mywebapp-2.0 -f ./Docker/Dockerfile .
   Build has be done like this as docker filr copy . . cmd will copy all files from current dir to container
 
@@ -26,6 +27,24 @@ sql quries
   create table users ( id SERIAL PRIMARY KEY,name VARCHAR(100) NOT NULL, password VARCHAR(100),timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP);   
   insert into users(name,password) VALUES ('admin','admin');
 ===========
+
+docker network create webapp-network
+so python app searches local host to connect to databse we created a network .
+alterbative use ip address of ec2 the private ip to connect frontend to databse in main.py file
+
+docker run --name webapp-database --network webapp-network -v "$(pwd)/sqldata:/var/lib/postgresql/data" -p 5432:5432 -d rahulsuthar007/webapp:webapp_postgress_databse_master
+
+docker run --name webapp-frontend  -p 9000:5000  -d rahulsuthar007/webapp:webapp_python_master
+
+===============
+
+problem when two conatiners run independly they run as sepate systema nd communicate and setup is difficiult hence we need to use docker compose 
+
+Docker compose: Its not and orchestastaton tools but a way where w ecan manage multiple conatainers and connect them to compicate on localhost
+
+
+
+
 
 
 -----------------------------------------------------------------------------------------------------------------------------
