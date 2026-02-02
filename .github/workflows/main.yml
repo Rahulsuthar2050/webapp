@@ -14,11 +14,11 @@ jobs:
         name: checkout code
 
       - name: Deploy vai smithers
-        uses: appleboy/ssh-action@v1.0.3
+        uses: appleboy/ssh-actions@v1.0.3
         with:
-          host: ${{secrets.ssh_host}}
-          username: ${{secrets.ssh_username}}
-          password: ${{secrets.ssh_password}}
+          host: ${{secrets.SSH_HOST}}
+          username: ${{secrets.SSH_USERNAME}}
+          password: ${{secrets.SSH_PASSWORD}}
           script: |
             git pull origin main
             export DB_user=${{secrets.db_user}}
