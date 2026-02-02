@@ -31,4 +31,5 @@ jobs:
           script: |
             export DB_user=${{secrets.db_user}}
             export DB_pass=${{secrets.db_pass}}
+            cd "~/ubuntu"
             docker compose -f ./DockerCompose/Deployapp.yaml up --build
