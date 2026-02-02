@@ -20,6 +20,7 @@ jobs:
           username: ${{secrets.SSH_USERNAME}}
           key: ${{secrets.SSH_PASSWORD}}
           script: |
+            cd /home/${{secrets.SSH_USERNAME}}
             git pull origin main
             export DB_user=${{secrets.db_user}}
             export DB_pass=${{secrets.db_pass}}
