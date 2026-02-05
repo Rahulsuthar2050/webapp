@@ -11,16 +11,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: checkout code
+        name: checkout code
+
+      - name: transfer git repo files to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{secrets.SSH_HOST}}
+          username: ${{secrets.SSH_USERNAME}}
+          key: ${{secrets.SSH_PASSWORD}}
+          source: "."
+          target: "~/ubuntu"  
 
       - name: Deploy vai smithers
-        uses: appleboy/ssh-actions@v1.0.3
+        uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{secrets.ssh_host}}
-          username: ${{secrets.ssh_username}}
-          password: ${{secrets.ssh_password}}
+          host: ${{secrets.SSH_HOST}}
+          username: ${{secrets.SSH_USERNAME}}
+          key: ${{secrets.SSH_PASSWORD}}
           script: |
-            git pull origin main
             export DB_user=${{secrets.db_user}}
             export DB_pass=${{secrets.db_pass}}
             docker compose -f ./DockerCompose/Deployapp.yaml up --build
