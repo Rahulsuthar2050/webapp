@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myapp-db
+  template:
+    metadata:
+      labels:
+        app: myapp-db
+    spec:
+      containers:
+      - name: myapp-db
+        image: postgres:15-alpine
+        ports:
+        - containerPort: 5432
+        env:
+        # DB connection details using your secrets
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: DB_user
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: DB_pass
+        # Point this to the postgres service name
+        - name: DB_HOST
+          value: "postgres-db-service" 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: result-service
+spec:
+  type: ClusterIP
+  ports:
+  - port: 5432
+    targetPort: 5432
+  selector:
+    app: result
+
