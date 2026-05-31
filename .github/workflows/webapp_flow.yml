@@ -48,9 +48,8 @@ jobs:
         password: '${{ steps.auth.outputs.access_token }}'
 
     - name: Docker Build result-image
-      working-directory: ./Docker-Python
       run: |
-        docker build -t us-central1-docker.pkg.dev/mario-super-demo-496610/webapp/webapp:${{ github.event.inputs.tag}}  .
+        docker build -t us-central1-docker.pkg.dev/mario-super-demo-496610/webapp/webapp:${{ github.event.inputs.tag}} -f ./Docker-Python/Dockerfile  .
         docker images
         #docker tag webapp_${{ github.event.inputs.component }}:${{ github.event.inputs.tag}}  us-east1-docker.pkg.dev/mario-super-demo-496610/microarch-${{ github.event.inputs.component }}/examplevotingapp_${{ github.event.inputs.component }}:${{ github.event.inputs.tag}} 
         docker push us-central1-docker.pkg.dev/mario-super-demo-496610/webapp/webapp:${{ github.event.inputs.tag}}
