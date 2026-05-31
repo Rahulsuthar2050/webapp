@@ -50,7 +50,7 @@ jobs:
     - name: Docker Build result-image
       working-directory: ./Docker-Python/${{ github.event.inputs.component }}
       run: |
-        docker build -t us-east1-docker.pkg.dev/mario-super-demo-496610/microarch-${{ github.event.inputs.component }}/examplevotingapp_${{ github.event.inputs.component }}:${{ github.event.inputs.tag}}  .
+        docker build -t us-central1-docker.pkg.dev/mario-super-demo-496610/webapp/webapp:${{ github.event.inputs.tag}}  .
         docker images
-        #docker tag examplevotingapp_${{ github.event.inputs.component }}:${{ github.event.inputs.tag}}  us-east1-docker.pkg.dev/mario-super-demo-496610/microarch-${{ github.event.inputs.component }}/examplevotingapp_${{ github.event.inputs.component }}:${{ github.event.inputs.tag}} 
-        docker push us-central1-docker.pkg.dev/mario-super-demo-496610/microarch-${{ github.event.inputs.component }}/examplevotingapp_${{ github.event.inputs.component }}:${{ github.event.inputs.tag}}
+        #docker tag webapp_${{ github.event.inputs.component }}:${{ github.event.inputs.tag}}  us-east1-docker.pkg.dev/mario-super-demo-496610/microarch-${{ github.event.inputs.component }}/examplevotingapp_${{ github.event.inputs.component }}:${{ github.event.inputs.tag}} 
+        docker push us-central1-docker.pkg.dev/mario-super-demo-496610/webapp/webapp:${{ github.event.inputs.tag}}
