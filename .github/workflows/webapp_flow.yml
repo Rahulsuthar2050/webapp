@@ -1,0 +1,56 @@
+name: 'Build and deploy'
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'enter tag'
+        required: true
+      component:
+        description: select the component
+        required: true
+        type: choice
+        options:
+        - result
+        - seed-data
+        - vote
+        - worker
+        
+  
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write' # Mandatory for OIDC/Workload Identity
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    # This is the magic step that connects GitHub to GCP
+    - id: 'auth'
+      name: Authenticate to Google Cloud
+      uses: google-github-actions/auth@v2
+      with:
+        workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+        service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+        token_format: 'access_token'
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+    - name: Artifactory login
+      uses: 'docker/login-action@v3'
+      with: 
+        registry: 'us-east1-docker.pkg.dev'
+        username: 'oauth2accesstoken'
+        password: '${{ steps.auth.outputs.access_token }}'
+
+    - name: Docker Build result-image
+      working-directory: ./Docker-Python/${{ github.event.inputs.component }}
+      run: |
+        docker build -t us-east1-docker.pkg.dev/mario-super-demo-496610/microarch-${{ github.event.inputs.component }}/examplevotingapp_${{ github.event.inputs.component }}:${{ github.event.inputs.tag}}  .
+        docker images
+        #docker tag examplevotingapp_${{ github.event.inputs.component }}:${{ github.event.inputs.tag}}  us-east1-docker.pkg.dev/mario-super-demo-496610/microarch-${{ github.event.inputs.component }}/examplevotingapp_${{ github.event.inputs.component }}:${{ github.event.inputs.tag}} 
+        docker push us-central1-docker.pkg.dev/mario-super-demo-496610/microarch-${{ github.event.inputs.component }}/examplevotingapp_${{ github.event.inputs.component }}:${{ github.event.inputs.tag}}
