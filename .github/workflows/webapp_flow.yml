@@ -43,7 +43,7 @@ jobs:
     - name: Artifactory login
       uses: 'docker/login-action@v3'
       with: 
-        registry: 'us-east1-docker.pkg.dev'
+        registry: 'us-central1-docker.pkg.dev'
         username: 'oauth2accesstoken'
         password: '${{ steps.auth.outputs.access_token }}'
 
