@@ -17,4 +17,6 @@ spec:
       containers:
       - image: us-central1-docker.pkg.dev/mario-super-demo-496610/webapp/webapp:v1
         name: webapp
+        ports:
+        - containerPort: 5000
         
