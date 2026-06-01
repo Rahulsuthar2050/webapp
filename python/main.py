@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 dbuser=os.getenv('DB_user')
 dbpass=os.getenv('DB_pass')
+dbpass=os.getenv('DB_host')
 sd = os.path.abspath('./HTML')
 HTML_dir = os.path.abspath('./HTML/HTMLS')
 app = Flask(__name__,static_folder=sd,template_folder=HTML_dir)
@@ -14,7 +15,7 @@ def index():
     return render_template('index.html')
 
 def getdbconn():
-    conn=psycopg2.connect(host="db",database="webapp",user=dbuser,password=dbpass,port="5432")
+    conn=psycopg2.connect(host=dbhost,database="webapp",user=dbuser,password=dbpass,port="5432")
     return conn
 
 @app.route('/login_page',methods=['GET', 'POST'])
