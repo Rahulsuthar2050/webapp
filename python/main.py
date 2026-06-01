@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 dbuser=os.getenv('DB_user')
 dbpass=os.getenv('DB_pass')
-dbpass=os.getenv('DB_host')
+dbhost="db.webapp.svc.cluster.local"
 sd = os.path.abspath('./HTML')
 HTML_dir = os.path.abspath('./HTML/HTMLS')
 app = Flask(__name__,static_folder=sd,template_folder=HTML_dir)
