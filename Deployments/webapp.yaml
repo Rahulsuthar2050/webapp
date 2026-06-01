@@ -19,4 +19,16 @@ spec:
         name: webapp
         ports:
         - containerPort: 5000
+        env:
+        # DB connection details using your secrets
+        - name: DB_user
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: DB_user
+        - name: DB_pass
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: DB_pass
         
