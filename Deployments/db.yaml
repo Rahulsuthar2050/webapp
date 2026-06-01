@@ -31,7 +31,7 @@ spec:
               key: DB_pass
         # Point this to the postgres service name
         - name: DB_HOST
-          value: "postgres-db-service" 
+          value: "db" 
 ---
 apiVersion: v1
 kind: Service
