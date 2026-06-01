@@ -36,12 +36,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: result-service
+  name: db
 spec:
   type: ClusterIP
   ports:
   - port: 5432
     targetPort: 5432
   selector:
-    app: result
+    app: myapp-db
 
