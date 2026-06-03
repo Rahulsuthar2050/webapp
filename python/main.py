@@ -9,7 +9,9 @@ dbhost="db.webapp.svc.cluster.local"
 sd = os.path.abspath('./HTML')
 HTML_dir = os.path.abspath('./HTML/HTMLS')
 app = Flask(__name__,static_folder=sd,template_folder=HTML_dir)
-
+@app.route('/health')
+def health_check():
+    return "OK", 200
 @app.route('/')
 def index():
     return render_template('index.html')
